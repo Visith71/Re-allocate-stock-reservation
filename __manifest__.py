@@ -17,7 +17,6 @@
                """,
     'data': [
         "views/mrp_production_view.xml",
-        "views/asset.xml",
     ],
     'installable': True,
     'application': True,

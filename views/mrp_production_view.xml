@@ -20,24 +20,6 @@
         </record>
         <!-- end -->
 
-        <!-- Action to trigger product moves tree view -->
-        <record id="go_to_product_move_line" model="ir.actions.act_window">
-            <field name="name">Product moves</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">stock.move.line</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,kanban,pivot,form</field>
-            <field name="view_id" ref="view_move_line_tree"/>
-            <field name="context">{'search_default_done': 1, 'search_default_groupby_product_id': 1}</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_empty_folder">
-                There's no product move yet
-              </p>
-            </field>
-            <field name="target">main</field>
-        </record>
-        <!-- end -->
-
         <!-- inherit field of mrp prodcution form view -->
         <record id="mrp_production_form_view" model="ir.ui.view">
             <field name="name">mrp.production.form</field>
@@ -46,29 +28,13 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='needs_lots']" position="after">
                     <field name="qty_on_hand" string="Qty on hand"/>
-                    <button name="go_to_product_move"
+                    <button name="go_to_product_move_line"
                             string="" 
                             type="object"
                             class="fa fa-external-link btn btn-secondary o_external_button" 
                             context="{'consume': False}"/>
                 </xpath>
-                <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_id']" position="attributes">
-                  <attribute name="widget">dynamic_tooltip</attribute>
-              </xpath>
             </field>
-        </record>
-        <!-- end -->
-
-        <!-- Add new option in action button -->
-        <record id="perform_unreserve_action" model="ir.actions.act_window">
-            <field name="name">Unreserved</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">stock.move.line</field>
-            <!-- <field name="domain">['|', ('id','in',active_ids), ('parent_id', 'in', active_ids)]</field> -->
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_move_line_tree"/>
-            <field name="binding_model_id" ref="model_stock_move_line"/>
         </record>
         <!-- end -->
     </data>
