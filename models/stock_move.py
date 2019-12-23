@@ -8,6 +8,8 @@ class StockMove(models.Model):
 
     qty_available = fields.Float(
         related='product_id.qty_available', store=True, help="Quantity on hand")
+    virtual_available = fields.Float(
+        related='product_id.virtual_available', store=True, help="Forecast Quantity")
 
     @api.multi
     def go_to_product_move_line(self):
