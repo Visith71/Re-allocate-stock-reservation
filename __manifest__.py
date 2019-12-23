@@ -9,7 +9,7 @@
     'website':'',
     'category': 'Manufacturing',
     'sequence': 16,
-    'summary': '',
+    'summary': 'Allow to re-allocate stock reservation to more urgent MOs',
     'depends': ['mrp'],
     'description': """This module provides the following features:
                     1. Not allow negative stock.
