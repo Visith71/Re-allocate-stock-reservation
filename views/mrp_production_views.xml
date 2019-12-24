@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='needs_lots']" position="after">
+                <field name="qty_available" string="Qty on hand"/>
+                <field name="virtual_available" string="Forecast Quantity"/>
+                <!-- <field name="check_available" string="Check"/> -->
+                <button name="go_to_product_move_line" string="Go to Product Move Line" 
+                        type="object" class="fa fa-external-link btn btn-secondary o_external_button" 
+                        context="{'consume': False}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
