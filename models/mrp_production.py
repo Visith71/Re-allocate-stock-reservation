@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, Warning
 
 class MrpProduction(models.Model):
     _inherit = 'mrp.production'
@@ -21,9 +21,12 @@ class MrpProduction(models.Model):
         self.ensure_one()
         super(MrpProduction, self).open_produce_product()
         for order in self:
+            all_reserved_availability = all([int(m.reserved_availability) <= 0 for m in order.move_raw_ids])
             any_reserved_availability = any([int(m.reserved_availability) <= 0 for m in order.move_raw_ids])
-            if any_reserved_availability:
+            if all_reserved_availability:
                 raise UserError(_('You cannot produce a MO without checking availability.'))
+            elif any_reserved_availability:
+                raise Warning(_("Not enough invetory! Some components are not available.\nPlease increase your stock."))
         action = self.env.ref('mrp.act_mrp_product_produce').read()[0]
         return action
 
