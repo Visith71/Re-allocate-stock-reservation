@@ -14,7 +14,6 @@ class MrpProduction(models.Model):
                 if int(m.qty_available - m.product_uom_qty) < 0:
                     raise UserError(_('You cannot produce a MO with a negative stock move.'))
         super(MrpProduction, self).button_mark_done()
-        return self.write({'state': 'done', 'date_finished': fields.Datetime.now()})
 
     @api.multi
     def post_inventory(self):
@@ -24,4 +23,3 @@ class MrpProduction(models.Model):
                 if int(m.qty_available - m.product_uom_qty) < 0:
                     raise UserError(_('You cannot produce a MO with a negative stock move.'))
         super(MrpProduction, self).post_inventory()
-        return True
